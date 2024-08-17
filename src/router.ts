@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 
 const routes = [
     {path: '/', component: () => import('./App.vue')},
-    {path: '/add', component: () => import('./pages/AddPage.vue')},
+    {path: '/add', component: () => import('./pages/BohnenPage.vue')},
 ]
 
 
