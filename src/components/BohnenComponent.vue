@@ -15,11 +15,11 @@
 
     watch(() => props, ()=> {
         data = {
-            Name: props.Name,
-            Röster: props.Röster,
-            Website: props.Website,
-            Notiz: props.Notiz,
-            VorhandendeMenge: props.VorhandendeMenge
+            Name: props.data.Name,
+            Röster: props.data.Röster,
+            Website: props.data.Website,
+            Notiz: props.data.Notiz,
+            VorhandendeMenge: props.data.VorhandendeMenge
         }
     });
     const editMode: Ref<boolean> = ref(props.editMode);
@@ -28,12 +28,16 @@
         editMode.value = !editMode.value
     }
 
+    if(props.data.Name == "Neue Bohne"){
+        editMode.value = true;
+    }
+
 </script>
 
 
 <template>
     <div class="bohnen-component">
-        <h2>{{ data.Name }}</h2>
+        <input v-model="data.Name" :readonly="!editMode"/>
         <input v-model="data.VorhandendeMenge" type="number" :readonly="!editMode"/>
         <input v-model="data.Röster" :readonly="!editMode"/>
         <input v-model="data.Website" v-if="data.Website && editMode"/></input>

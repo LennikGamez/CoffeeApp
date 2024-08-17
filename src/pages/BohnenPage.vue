@@ -3,8 +3,9 @@
     import Bohne from '../components/BohnenComponent.vue'
     import AddButton from '../components/AddButton.vue';
     import { Bohne as BohnenType } from '../DB-Models';
+    import { Ref, ref } from 'vue';
 
-    const mockDataBohne: Array<BohnenType> = [
+    const mockDataBohne: Ref<BohnenType[]> = ref([
         {
             Name: "Espresso Koffeinfrei",
             Röster: "Kaffeemann umme Ecke",
@@ -21,7 +22,14 @@
             VorhandendeMenge: 0
         }
 
-    ]
+    ])
+
+
+    function addBohnenData(data: BohnenType) {
+        
+        mockDataBohne.value.push(data);
+        console.log(mockDataBohne);
+    }
 </script>
 
 
@@ -32,7 +40,7 @@
         :editMode="false"
     />
 
-    <AddButton />
+    <AddButton @click="addBohnenData({Name: 'Neue Bohne', Röster: 'Röster', Website: 'Website', Notiz: 'Notiz', VorhandendeMenge: 0} as BohnenType)" />
 </template>
 
 
