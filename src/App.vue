@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <h1>Coffeefe</h1>
+  <RouterView/>
 </template>
 
 <style scoped>
