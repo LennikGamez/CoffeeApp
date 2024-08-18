@@ -2,9 +2,10 @@
 
     import { ref, Ref } from 'vue';
     import { Bohne } from '../DB-Models';
-import APIConnector from '../util/APIConnector';
+    import APIConnector from '../util/APIConnector';
 
     const props = defineProps<{data: Bohne, editMode: boolean}>();
+    const emit = defineEmits(['deleted']);
 
     let identifier = props.data.Name;
     let data: Bohne = {
@@ -35,6 +36,12 @@ import APIConnector from '../util/APIConnector';
         APIConnector.updateBohnen(identifier, data).then(()=> identifier = data.Name);
     }
 
+    function deleteBohne(){        
+        APIConnector.deleteBohnen(data.Name).then(()=>{
+            emit('deleted');
+        }).catch((err) => console.log(err));
+    }
+
 </script>
 
 
@@ -48,6 +55,7 @@ import APIConnector from '../util/APIConnector';
         <textarea v-model="data.Notiz" :readonly="!editMode"/>
 
         <button @click="toggleEditMode">{{ editMode ? "Save" : "Edit" }}</button>
+        <button @click="deleteBohne">Delte</button>
     </div>
 </template>
 

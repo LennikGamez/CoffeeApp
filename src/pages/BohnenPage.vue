@@ -19,6 +19,10 @@
         APIConnector.getBohnen().then((data) => bohnenDataRef.value = data);
     }
 
+    function deleteBohne(data: BohnenType) {
+        bohnenDataRef.value = bohnenDataRef.value.filter((bohne) => data !== bohne);
+    }
+
     fetchData();
 
 </script>
@@ -29,6 +33,7 @@
     <Bohne v-for="(item, index) in bohnenDataRef" :key="index"
         :data = "item"
         :editMode="false"
+        @deleted="deleteBohne(item)"
     />
 
     <AddButton @click="addBohnenData({Name: 'Neue Bohne', Röster: 'Röster', Website: 'Website', Notiz: 'Notiz', VorhandendeMenge: 0} as BohnenType)" />
