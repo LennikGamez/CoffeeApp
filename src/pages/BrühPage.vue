@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-
+    import SelectComponent from '../components/selectComponent.vue';
+import APIConnector from '../util/APIConnector';
 </script>
 
 
@@ -8,16 +9,8 @@
         <div id="selection-area" class="section-wrapper">
             <h1>Brühung</h1>
             <div class="flex-div">
-                <select>
-                    <option value="Espresso">Espresso</option>
-                    <option value="Doppelter Espresso">Doppelter Espresso</option>
-                    <option value="Cafe Crema">Cafe Crema</option>
-                </select>
-                <select>
-                    <option value="Bohne1">Bohne1</option>
-                    <option value="Bohne2">Bohne2</option>
-                    <option value="Bohne3">Bohne3</option>
-                </select>
+                <SelectComponent :fetch-function="()=>{return APIConnector.getMethods();}"/>
+                <SelectComponent :fetch-function="()=>{return APIConnector.getBohnenNames();}"/>
             </div>
 
         </div>
