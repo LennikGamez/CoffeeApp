@@ -13,12 +13,15 @@
   -moz-osx-font-smoothing: grayscale;
 
 
+  --contrast-color : hsl(25, 100%, 50%);
   --primary-color: hsl(25, 100%, 19%);
   --secondary-color: hsl(25, 70%, 25%);
 
   --primary-text-color: hsl(0, 0%, 100%);
   --secondary-text-color: hsl(25, 0%, 58%); 
   --bg-color: hsl(0, 100%, 99%, 0.98);
+
+  --border-radius: 4px;
 
 }
 
