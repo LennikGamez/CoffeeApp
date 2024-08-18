@@ -39,6 +39,21 @@ class APIConnector{
         })
         return await resp.ok;
     }
+
+    public static async getBohne(name: string): Promise<Bohne>{
+        const resp = await fetch(APIConnector.endpoint("/beans/" + name));
+        return await resp.json() as Bohne;
+    }
+
+    public static async getMethods(): Promise<string[]>{
+        const resp = await fetch(APIConnector.endpoint("/methods"));
+        return await resp.json() as string[];
+    }
+
+    public static async getBohnenNames(): Promise<string[]>{
+        const resp = await fetch(APIConnector.endpoint("/beannames"));
+        return await resp.json() as string[];
+    }
 }
 
 
