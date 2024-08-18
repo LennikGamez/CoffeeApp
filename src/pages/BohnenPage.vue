@@ -11,6 +11,8 @@
     
     function addBohnenData(data: BohnenType) {      
         bohnenDataRef.value.push(data);
+
+        APIConnector.addBohnen(data).then(() => fetchData());
     }
 
     function fetchData() {
