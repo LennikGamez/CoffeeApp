@@ -4,38 +4,27 @@
     import AddButton from '../components/AddButton.vue';
     import { Bohne as BohnenType } from '../DB-Models';
     import { Ref, ref } from 'vue';
+    import APIConnector from '../util/APIConnector';
 
-    const mockDataBohne: Ref<BohnenType[]> = ref([
-        {
-            Name: "Espresso Koffeinfrei",
-            Röster: "Kaffeemann umme Ecke",
-            Website: "https://www.kaffeemann.de/",
-            Notiz: "Espresso Koffeinfrei. Originale Zutaten. Keine Sonderbehandlungen.",
-            VorhandendeMenge: 0
-        },
-
-        {
-            Name: "II Fortunato",
-            Röster: "Kaffeemann umme Ecke",
-            Website: "https://www.kaffeemann.de/",
-            Notiz: "Fortunato. Originale Zutaten. Keine Sonderbehandlungen.",
-            VorhandendeMenge: 0
-        }
-
-    ])
-
-
-    function addBohnenData(data: BohnenType) {
-        
-        mockDataBohne.value.push(data);
-        console.log(mockDataBohne);
+    const bohnenDataRef: Ref<BohnenType[]> = ref([] as BohnenType[]);
+    
+    
+    function addBohnenData(data: BohnenType) {      
+        bohnenDataRef.value.push(data);
     }
+
+    function fetchData() {
+        APIConnector.getBohnen().then((data) => bohnenDataRef.value = data);
+    }
+
+    fetchData();
+
 </script>
 
 
 <template>
     <h1>Bohnen</h1>
-    <Bohne v-for="(item, index) in mockDataBohne" :key="index"
+    <Bohne v-for="(item, index) in bohnenDataRef" :key="index"
         :data = "item"
         :editMode="false"
     />

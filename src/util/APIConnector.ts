@@ -7,12 +7,12 @@ class APIConnector{
         return APIConnector.SERVER + endpoint
     }
     public static async getBohnen(): Promise<Bohne[]>{
-        const resp = await fetch(APIConnector.endpoint("/bohnen"));
+        const resp = await fetch(APIConnector.endpoint("/beans"));
         return await resp.json() as Bohne[];
     }
 
     public static async addBohnen(bohne: Bohne): Promise<boolean>{
-        const resp = await fetch(APIConnector.endpoint("/bohnen"), {
+        const resp = await fetch(APIConnector.endpoint("/beans"), {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -23,7 +23,7 @@ class APIConnector{
     }
 
     public static async updateBohnen(oldName:string, bohne: Bohne): Promise<boolean>{
-        const resp = await fetch(APIConnector.endpoint("/bohnen/" + oldName), {
+        const resp = await fetch(APIConnector.endpoint("/beans/" + oldName), {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -34,7 +34,7 @@ class APIConnector{
     }
 
     public static async deleteBohnen(name: string): Promise<boolean>{
-        const resp = await fetch(APIConnector.endpoint("/bohnen/" + name), {
+        const resp = await fetch(APIConnector.endpoint("/beans/" + name), {
             method: "DELETE"
         })
         return await resp.ok;
