@@ -20,3 +20,12 @@ h1 {
   color: hsl(25, 100%, 19%);
 
 }
+
+html{
+  height: 100vh;
+}
+
+#app, body{
+  margin: 0;
+  height: 100%;
+}
