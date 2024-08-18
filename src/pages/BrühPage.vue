@@ -77,6 +77,7 @@ import APIConnector from '../util/APIConnector';
 
     input,
     select{
+        font-family: "Nunito", sans-serif;
         border: none;
         border-radius: var(--border-radius);
 
