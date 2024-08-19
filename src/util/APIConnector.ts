@@ -60,18 +60,18 @@ class APIConnector{
         return await resp.json() as string[];
     }
 
-    public static async addBrühung(brühung: Brühung): Promise<boolean>{
+    public static async addBrühung(brühung: Brühung){
         const resp = await fetch(APIConnector.endpoint("/brew"), {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(brühung)
-        })
-        return await resp.ok;
+        })        
+        return await resp.json() as {id: number};
     }
 
-    public static async doesBrühungExist(brühung: Brühung): Promise<boolean>{
+    public static async doesBrühungExist(brühung: Brühung): Promise<Brühung>{
         const resp = await fetch(APIConnector.endpoint("/brew-exists"), {
             method: "PUT",
             headers: {
@@ -80,16 +80,7 @@ class APIConnector{
             body: JSON.stringify(brühung)
         })
         const data: Brühung[] = await resp.json();
-        
-        // Wenn eine Brühung dieser Art existiert wird das zubereitet Feld um 1 erhöht
-        if (data.length > 0) {
-            APIConnector.addToBrühung(data[0]);
-            return true;
-        }else{
-            brühung.zubereitet++;
-            APIConnector.addBrühung(brühung);
-            return false;
-        }
+        return data[0];
     }
     public static async addToBrühung(brühung: Brühung): Promise<boolean>{
         const resp = await fetch(APIConnector.endpoint("/brew-count"), {
@@ -120,6 +111,17 @@ class APIConnector{
     public static async getRezept(methode: string, bohne: string): Promise<Brühung>{
         const resp = await fetch(APIConnector.endpoint("/rezept/" + methode + "/" + bohne));
         return await resp.json() as Brühung;
+    }
+
+    public static async saveAsRecipe(methode: string, bohne: string, BrühID: number): Promise<boolean>{
+        const resp = await fetch(APIConnector.endpoint("/save-rezept"), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({BrühID: BrühID, Methode: methode, Bohne: bohne})
+        });        
+        return await resp.ok;
     }
 }
 

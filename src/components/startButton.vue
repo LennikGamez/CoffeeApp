@@ -21,8 +21,18 @@ import APIConnector from '../util/APIConnector';
         return true;
     }
 
-    function appendBrühung(b: Brühung) {
-        APIConnector.doesBrühungExist(b);
+    async function appendBrühung(b: Brühung) {
+        const data = await APIConnector.doesBrühungExist(b);
+        // Wenn eine Brühung dieser Art existiert wird das zubereitet Feld um 1 erhöht
+        if (data) {
+            APIConnector.addToBrühung(data);
+            return true;
+        }else{
+            // ansonsten neue Brühung anlegen
+            b.zubereitet = 1;
+            APIConnector.addBrühung(b);
+            return false;
+        }
     }
 
     function reduceBeans(name: string, menge: number) {

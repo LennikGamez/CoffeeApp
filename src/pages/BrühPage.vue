@@ -3,9 +3,9 @@
     import SelectComponent from '../components/selectComponent.vue';
     import StartButton from '../components/startButton.vue';
     import APIConnector from '../util/APIConnector';
-import InfoComponent from '../components/InfoComponent.vue';
-
-    const bohnenMenge = ref<HTMLInputElement | null>(null)
+    import InfoComponent from '../components/InfoComponent.vue';
+    import LikeButton from '../components/likeButton.vue';
+    import { Brühung } from '../DB-Models';
 
     const form = ref<HTMLFormElement | null>(null);
     const startButton = ref<typeof StartButton | null>(null);
@@ -87,6 +87,35 @@ import InfoComponent from '../components/InfoComponent.vue';
         
 
     }
+
+    async function saveAsRecipe(){
+        if (!form.value) return;
+        const formData = new FormData(form.value);
+        const formBrühung: Brühung = {
+            BohnenMenge: parseInt(formData.get("bohnenmenge") as string),
+            GetränkeMenge: parseInt(formData.get("getränkemenge") as string),
+            Mahlgrad: parseInt(formData.get("mahlgrad") as string),
+            Brühtemperatur: parseInt(formData.get("brühtemperatur") as string),
+            BrühmethodenName: formData.get("method") as string,
+            BohnenName: formData.get("bohne") as string,
+        } as Brühung;
+        // get the BrühID of current data state or create a new one
+        const brühung = await APIConnector.doesBrühungExist(formBrühung);
+        let ID = -1;
+
+        if (!brühung) {
+            formBrühung.zubereitet = 0;
+            formBrühung.Notiz = "";
+            const resp = await APIConnector.addBrühung(formBrühung)
+            if (resp) {
+                ID = resp.id;                 
+            }
+        }else{
+            ID = brühung.BrühID;
+        }        
+        APIConnector.saveAsRecipe(formData.get("method") as string, formData.get("bohne") as string, ID)
+    }
+
 </script>
 
 
@@ -115,6 +144,7 @@ import InfoComponent from '../components/InfoComponent.vue';
                 <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>
             </div>
             <StartButton ref="startButton"/>
+            <LikeButton @click="saveAsRecipe"/>
         </div>
         <div id="info-center">
             <InfoComponent v-for="(item, index) in info.success" :key="index" :message="item" status="success" />
