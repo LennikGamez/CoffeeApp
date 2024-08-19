@@ -26,6 +26,10 @@
 
   --border-radius: 4px;
 
+  --warning-color: hsl(54, 100%, 50%);
+  --error-color: hsl(3, 100%, 50%);
+  --success-color: hsl(120, 100%, 50%);
+
 }
 
 h1 {

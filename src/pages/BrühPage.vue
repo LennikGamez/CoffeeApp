@@ -1,17 +1,68 @@
 <script lang="ts" setup>
-    import { ref } from 'vue';
-import SelectComponent from '../components/selectComponent.vue';
-import StartButton from '../components/startButton.vue';
+    import { Ref, ref } from 'vue';
+    import SelectComponent from '../components/selectComponent.vue';
+    import StartButton from '../components/startButton.vue';
     import APIConnector from '../util/APIConnector';
+import InfoComponent from '../components/InfoComponent.vue';
 
     const form = ref<HTMLFormElement | null>(null);
     const startButton = ref<typeof StartButton | null>(null);
+
+    const info: Ref<{warnings: {
+        [key: string]: string
+    }, errors: {
+        [key: string]: string
+    }, success: {
+        [key: string]: string
+    }}> = ref({
+        warnings:  {},
+        errors: {},
+        success: {},
+    });
+
+
+    function warn(name: string, msg: string){
+        info.value.warnings[name] = msg;
+    }
+    function throwError(name: string, msg: string){
+        info.value.errors[name] = msg;
+
+    }
+    function success(name: string, msg: string){
+        info.value.success[name] = msg;
+    }
+
+    function release(type: 'warnings' | 'errors' | 'success', name: string){
+        delete info.value[type][name];
+    }
 
     function appendBrühung(e: Event){
         e.preventDefault();
         if (!form.value) return;
         const formData = new FormData(form.value);
         startButton.value?.start(formData);
+    }
+
+    function checkBeanCount(event: Event){
+        if (!form.value) return;
+        const formData = new FormData(form.value);
+        const beansToBeUsed = parseInt(formData.get("bohnenmenge") as string);
+
+        APIConnector.getBohnenCount(formData.get("bohne") as string)
+        .then((data) => {
+            if (data - beansToBeUsed < 0) {
+                throwError("beans-low", "Nicht genug Bohnen. Es sind nur " + data + " Bohnen vorhanden.");
+                event.preventDefault();
+            }
+            else if (data - beansToBeUsed >= 0 && data-beansToBeUsed <= 20) {
+                warn("beans-low", "Nicht genug Bohnen. Es sind nur " + data + " Bohnen vorhanden. Es gibt nur noch " + (data - beansToBeUsed) + " Bohnen.");
+            }
+            else{
+                release("warnings", "beans-low");
+                release("errors", "beans-low");
+            }
+        })
+
     }
 </script>
 
@@ -31,12 +82,17 @@ import StartButton from '../components/startButton.vue';
                 Rezept
             </h1>
             <div id="recipe-inputs" class="flex-div">
-                <input required name="bohnenmenge" placeholder="Bohnenmenge"/>
+                <input required name="bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount"/>
                 <input required name="mahlgrad" placeholder="Mahlgrad"/>
                 <input required name="getränkemenge" placeholder="Getränkemenge"/>
                 <input required name= "brühtemperatur" placeholder="Brühtemperatur"/>
             </div>
             <StartButton ref="startButton"/>
+        </div>
+        <div id="info-center">
+            <InfoComponent v-for="(item, index) in info.success" :key="index" :message="item" status="success" />
+            <InfoComponent v-for="(item, index) in info.warnings" :key="index" :message="item" status="warning" />
+            <InfoComponent v-for="(item, index) in info.errors" :key="index" :message="item" status="error" />
         </div>
     </form>
 </template>
