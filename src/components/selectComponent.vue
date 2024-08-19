@@ -7,6 +7,8 @@
             fetchFunction: Function
         });
 
+    const emit = defineEmits(['selected']);
+
     let data = ref([]);
 
     onMounted(async () => {
@@ -18,7 +20,7 @@
 
 
 <template>
-    <select required :name="props.name">
+    <select required :name="props.name" @input="emit('selected')">
         <option v-for="option in data" :value="option">{{ option }}</option>
     </select>
 </template>

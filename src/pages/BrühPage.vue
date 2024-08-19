@@ -5,6 +5,8 @@
     import APIConnector from '../util/APIConnector';
 import InfoComponent from '../components/InfoComponent.vue';
 
+    const bohnenMenge = ref<HTMLInputElement | null>(null)
+
     const form = ref<HTMLFormElement | null>(null);
     const startButton = ref<typeof StartButton | null>(null);
 
@@ -70,6 +72,21 @@ import InfoComponent from '../components/InfoComponent.vue';
         })
 
     }
+
+
+    function getRecipe(){
+        if (!form.value) return;
+        const formData = new FormData(form.value);
+        APIConnector.getRezept(formData.get("method") as string, formData.get("bohne") as string)
+        .then((data) => {
+            (form.value?.querySelector('input[name="bohnenmenge"]') as HTMLInputElement).value = data.BohnenMenge.toString();
+            (form.value?.querySelector('input[name="mahlgrad"]') as HTMLInputElement).value = data.Mahlgrad.toString();
+            (form.value?.querySelector('input[name="getränkemenge"]') as HTMLInputElement).value = data.GetränkeMenge.toString();
+            (form.value?.querySelector('input[name="brühtemperatur"]') as HTMLInputElement).value = data.Brühtemperatur.toString();
+        })
+        
+
+    }
 </script>
 
 
@@ -78,8 +95,12 @@ import InfoComponent from '../components/InfoComponent.vue';
         <div id="selection-area" class="section-wrapper">
             <h1>Brühung</h1>
             <div class="flex-div">
-                <SelectComponent name="method" :fetch-function="()=>{return APIConnector.getMethods();}" />
-                <SelectComponent name="bohne" :fetch-function="()=>{return APIConnector.getBohnenNames();}"/>
+                <SelectComponent 
+                    @selected="getRecipe" name="method" 
+                    :fetch-function="()=>{return APIConnector.getMethods();}" />
+                <SelectComponent 
+                    @selected="getRecipe" name="bohne" 
+                    :fetch-function="()=>{return APIConnector.getBohnenNames();}"/>
             </div>
 
         </div>
@@ -88,10 +109,10 @@ import InfoComponent from '../components/InfoComponent.vue';
                 Rezept
             </h1>
             <div id="recipe-inputs" class="flex-div">
-                <input required name="bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount"/>
-                <input required name="mahlgrad" placeholder="Mahlgrad"/>
-                <input required name="getränkemenge" placeholder="Getränkemenge"/>
-                <input required name= "brühtemperatur" placeholder="Brühtemperatur"/>
+                <input ref="bohnenmenge" required name="bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount"/>
+                <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad"/>
+                <input ref="getränkemenge" required name="getränkemenge" placeholder="Getränkemenge"/>
+                <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>
             </div>
             <StartButton ref="startButton"/>
         </div>

@@ -113,6 +113,14 @@ class APIConnector{
         });
         return await resp.ok;
     }
+
+
+    // Rezepte
+
+    public static async getRezept(methode: string, bohne: string): Promise<Brühung>{
+        const resp = await fetch(APIConnector.endpoint("/rezept/" + methode + "/" + bohne));
+        return await resp.json() as Brühung;
+    }
 }
 
 
