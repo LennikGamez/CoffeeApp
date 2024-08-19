@@ -47,11 +47,12 @@
             success("erfolgreich", "Brühung erfolgreich hinzugefügt!");
             setTimeout(() => {
                 release("success", "erfolgreich");
+                checkBeanCount();
             }, 2000)
         }
     }
 
-    function checkBeanCount(event: Event){
+    function checkBeanCount(event: Event | null = null){
         if (!form.value) return;
         const formData = new FormData(form.value);
         const beansToBeUsed = parseInt(formData.get("bohnenmenge") as string);
@@ -59,13 +60,13 @@
         APIConnector.getBohnenCount(formData.get("bohne") as string)
         .then((data) => {
             if (data - beansToBeUsed < 0) {
-                throwError("beans-low", "Nicht genug Bohnen. Es sind nur " + data + " Bohnen vorhanden.");
-                event.preventDefault();
+                throwError("beans-low", "Bitte fülle die Bohnen nach. Es sind nur " + data + "g Bohnen vorhanden.");
+                if (event) event.preventDefault();
             }else{
                 release("errors", "beans-low");
             }
             if (data - beansToBeUsed >= 0 && data-beansToBeUsed <= 20) {
-                warn("beans-low", " Es werden nur noch " + (data- beansToBeUsed) + " Bohnen vorhanden sein. Es gibt nur noch " + data + " Bohnen.");
+                warn("beans-low", " Es werden nur noch " + (data- beansToBeUsed) + "g Bohnen vorhanden sein. Es gibt nur noch " + data + " Bohnen.");
             }
             else{
                 release("warnings", "beans-low");
@@ -94,7 +95,7 @@
             (form.value?.querySelector('input[name="getränkemenge"]') as HTMLInputElement).value = data.GetränkeMenge.toString();
             (form.value?.querySelector('input[name="brühtemperatur"]') as HTMLInputElement).value = data.Brühtemperatur.toString();
             
-            checkBeanCount(new SubmitEvent('submit', {cancelable: true}));
+            checkBeanCount();
         });
         
 
