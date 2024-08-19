@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { Ref, ref } from 'vue';
+    import { onMounted, Ref, ref } from 'vue';
     import SelectComponent from '../components/selectComponent.vue';
     import StartButton from '../components/startButton.vue';
     import APIConnector from '../util/APIConnector';
@@ -77,6 +77,7 @@
     function getRecipe(){
         if (!form.value) return;
         const formData = new FormData(form.value);
+        if (!formData.get("method") || !formData.get("bohne")) return;
         APIConnector.getRezept(formData.get("method") as string, formData.get("bohne") as string)
         .then((data) => {
             // if empty object: no recipe found reset input fields

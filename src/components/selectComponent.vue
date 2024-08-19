@@ -14,6 +14,10 @@
     onMounted(async () => {
         if (!props.fetchFunction) return;        
         data.value = await props.fetchFunction();
+        
+        setTimeout(() => {
+            emit('selected');
+        }, 0);
     });
 
 </script>
