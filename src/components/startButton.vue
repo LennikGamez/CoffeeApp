@@ -40,7 +40,8 @@ import APIConnector from '../util/APIConnector';
 
 
 <style scoped>
-    button {
+    input {
+        width: fit-content;
         border-radius: 50px;
         outline: none;
         border: none;

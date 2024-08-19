@@ -153,6 +153,7 @@ import InfoComponent from '../components/InfoComponent.vue';
         flex-direction: column;
         gap: 2.8rem;
         justify-content: start;
+        align-items: center;
     }
 
     input,
@@ -165,8 +166,13 @@ import InfoComponent from '../components/InfoComponent.vue';
     }
 
     input{
-        background-color: var(--secondary-color);
+        background-color: var(--primary-color);
         color: var(--primary-text-color);
+    }
+
+    input:hover{
+        background-color: var(--secondary-color);
+        cursor: pointer;
     }
 
     select{
