@@ -161,10 +161,18 @@
                 Rezept
             </h1>
             <div id="recipe-inputs" class="flex-div">
-                <input ref="bohnenmenge" required name="bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
-                <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad"/>
-                <input ref="getränkemenge" required name="getränkemenge" placeholder="Getränkemenge"/>
-                <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>
+                <label for="bohnenmenge">Bohnenmenge
+                    <input ref="bohnenmenge" required name="bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
+                </label>
+                <label for="mahlgrad">Mahlgrad
+                    <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad"/>
+                </label>
+                <label for="getränkemenge">Getränkemenge
+                    <input ref="getränkemenge" required name="getränkemenge" placeholder="Getränkemenge"/>
+                </label>
+                <label for="brühtemperatur">Brühtemperatur
+                    <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>
+                </label>
             </div>
             <div id="button-wrapper">
                 <StartButton ref="startButton"/>
@@ -181,6 +189,15 @@
 
 
 <style scoped>
+
+
+    label{
+        display: flex;
+        flex-direction: column;
+
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
 
     #button-wrapper{
         display: flex;
