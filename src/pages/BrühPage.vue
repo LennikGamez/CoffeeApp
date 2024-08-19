@@ -7,7 +7,8 @@ import StartButton from '../components/startButton.vue';
     const form = ref<HTMLFormElement | null>(null);
     const startButton = ref<typeof StartButton | null>(null);
 
-    function appendBrühung(){
+    function appendBrühung(e: Event){
+        e.preventDefault();
         if (!form.value) return;
         const formData = new FormData(form.value);
         startButton.value?.start(formData);
@@ -16,7 +17,7 @@ import StartButton from '../components/startButton.vue';
 
 
 <template>
-    <form id="brüh-page" @submit.prevent ref="form">
+    <form id="brüh-page" ref="form" @submit="appendBrühung($event)">
         <div id="selection-area" class="section-wrapper">
             <h1>Brühung</h1>
             <div class="flex-div">
@@ -30,12 +31,12 @@ import StartButton from '../components/startButton.vue';
                 Rezept
             </h1>
             <div id="recipe-inputs" class="flex-div">
-                <input name="bohnenmenge" placeholder="Bohnenmenge"/>
-                <input name="mahlgrad" placeholder="Mahlgrad"/>
-                <input name="getränkemenge" placeholder="Getränkemenge"/>
-                <input name= "brühtemperatur" placeholder="Brühtemperatur"/>
+                <input required name="bohnenmenge" placeholder="Bohnenmenge"/>
+                <input required name="mahlgrad" placeholder="Mahlgrad"/>
+                <input required name="getränkemenge" placeholder="Getränkemenge"/>
+                <input required name= "brühtemperatur" placeholder="Brühtemperatur"/>
             </div>
-            <StartButton @click="appendBrühung" ref="startButton"/>
+            <StartButton ref="startButton"/>
         </div>
     </form>
 </template>

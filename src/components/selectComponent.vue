@@ -18,7 +18,7 @@
 
 
 <template>
-    <select :name="props.name">
+    <select required :name="props.name">
         <option v-for="option in data" :value="option">{{ option }}</option>
     </select>
 </template>

@@ -32,9 +32,8 @@ import APIConnector from '../util/APIConnector';
 
 
 <template>
-    <button>
-        Starte Bezug
-    </button>
+    <input type="submit">
+    </input>
 </template>
 
 
