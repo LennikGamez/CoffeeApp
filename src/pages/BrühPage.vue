@@ -1,17 +1,27 @@
 <script lang="ts" setup>
-    import SelectComponent from '../components/selectComponent.vue';
+    import { ref } from 'vue';
+import SelectComponent from '../components/selectComponent.vue';
 import StartButton from '../components/startButton.vue';
     import APIConnector from '../util/APIConnector';
+
+    const form = ref<HTMLFormElement | null>(null);
+    const startButton = ref<typeof StartButton | null>(null);
+
+    function appendBrühung(){
+        if (!form.value) return;
+        const formData = new FormData(form.value);
+        startButton.value?.start(formData);
+    }
 </script>
 
 
 <template>
-    <form id="brüh-page" @submit.prevent>
+    <form id="brüh-page" @submit.prevent ref="form">
         <div id="selection-area" class="section-wrapper">
             <h1>Brühung</h1>
             <div class="flex-div">
-                <SelectComponent :fetch-function="()=>{return APIConnector.getMethods();}"/>
-                <SelectComponent :fetch-function="()=>{return APIConnector.getBohnenNames();}"/>
+                <SelectComponent name="method" :fetch-function="()=>{return APIConnector.getMethods();}" />
+                <SelectComponent name="bohne" :fetch-function="()=>{return APIConnector.getBohnenNames();}"/>
             </div>
 
         </div>
@@ -25,7 +35,7 @@ import StartButton from '../components/startButton.vue';
                 <input name="getränkemenge" placeholder="Getränkemenge"/>
                 <input name= "brühtemperatur" placeholder="Brühtemperatur"/>
             </div>
-            <StartButton @click="appendBrühung"/>
+            <StartButton @click="appendBrühung" ref="startButton"/>
         </div>
     </form>
 </template>

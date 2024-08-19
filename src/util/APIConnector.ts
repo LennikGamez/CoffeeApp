@@ -75,6 +75,8 @@ class APIConnector{
             body: JSON.stringify(brühung)
         })
         const data: Brühung[] = await resp.json();
+        
+        // Wenn eine Brühung dieser Art existiert wird das zubereitet Feld um 1 erhöht
         if (data.length > 0) {
             APIConnector.addToBrühung(data[0]);
             return true;

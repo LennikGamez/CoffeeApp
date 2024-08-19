@@ -16,7 +16,7 @@ type Brühung = {
     Mahlgrad: number,
     BohnenMenge: number,
     Brühtemperatur: number
-    zubereitet: boolean,
+    zubereitet: number,
     Notiz: string
 }
 

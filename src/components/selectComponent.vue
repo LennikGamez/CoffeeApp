@@ -3,6 +3,7 @@
 
 
     const props = defineProps({
+            name: String,
             fetchFunction: Function
         });
 
@@ -17,7 +18,7 @@
 
 
 <template>
-    <select>
+    <select :name="props.name">
         <option v-for="option in data" :value="option">{{ option }}</option>
     </select>
 </template>
