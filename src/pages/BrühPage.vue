@@ -61,13 +61,14 @@
             if (data - beansToBeUsed < 0) {
                 throwError("beans-low", "Nicht genug Bohnen. Es sind nur " + data + " Bohnen vorhanden.");
                 event.preventDefault();
+            }else{
+                release("errors", "beans-low");
             }
-            else if (data - beansToBeUsed >= 0 && data-beansToBeUsed <= 20) {
+            if (data - beansToBeUsed >= 0 && data-beansToBeUsed <= 20) {
                 warn("beans-low", " Es werden nur noch " + (data- beansToBeUsed) + " Bohnen vorhanden sein. Es gibt nur noch " + data + " Bohnen.");
             }
             else{
                 release("warnings", "beans-low");
-                release("errors", "beans-low");
             }
         })
 
@@ -92,6 +93,8 @@
             (form.value?.querySelector('input[name="mahlgrad"]') as HTMLInputElement).value = data.Mahlgrad.toString();
             (form.value?.querySelector('input[name="getränkemenge"]') as HTMLInputElement).value = data.GetränkeMenge.toString();
             (form.value?.querySelector('input[name="brühtemperatur"]') as HTMLInputElement).value = data.Brühtemperatur.toString();
+            
+            checkBeanCount(new SubmitEvent('submit', {cancelable: true}));
         });
         
 
@@ -99,6 +102,10 @@
 
     async function saveAsRecipe(){
         if (!form.value) return;
+        if (!form.value.checkValidity()) {
+            form.value.reportValidity();
+            return;
+        }
         const formData = new FormData(form.value);
         const formBrühung: Brühung = {
             BohnenMenge: parseInt(formData.get("bohnenmenge") as string),
@@ -125,6 +132,12 @@
         APIConnector.saveAsRecipe(formData.get("method") as string, formData.get("bohne") as string, ID)
     }
 
+    function resetInfo(){
+        info.value.errors = {};
+        info.value.warnings = {};
+        info.value.success = {};
+    }
+
 </script>
 
 
@@ -134,10 +147,10 @@
             <h1>Brühung</h1>
             <div class="flex-div">
                 <SelectComponent 
-                    @selected="getRecipe" name="method" 
+                    @selected="getRecipe(); resetInfo()" name="method" 
                     :fetch-function="()=>{return APIConnector.getMethods();}" />
                 <SelectComponent 
-                    @selected="getRecipe" name="bohne" 
+                    @selected="getRecipe(); resetInfo()" name="bohne" 
                     :fetch-function="()=>{return APIConnector.getBohnenNames();}"/>
             </div>
 
@@ -147,13 +160,15 @@
                 Rezept
             </h1>
             <div id="recipe-inputs" class="flex-div">
-                <input ref="bohnenmenge" required name="bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount"/>
+                <input ref="bohnenmenge" required name="bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
                 <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad"/>
                 <input ref="getränkemenge" required name="getränkemenge" placeholder="Getränkemenge"/>
                 <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>
             </div>
-            <StartButton ref="startButton"/>
-            <LikeButton @click="saveAsRecipe"/>
+            <div id="button-wrapper">
+                <StartButton ref="startButton"/>
+                <LikeButton @click="saveAsRecipe"/>
+            </div>
         </div>
         <div id="info-center">
             <InfoComponent v-for="(item, index) in info.success" :key="index" :message="item" status="success" />
@@ -165,6 +180,14 @@
 
 
 <style scoped>
+
+    #button-wrapper{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        justify-content: center;
+        align-items: center;
+    }
 
     h1{
         text-align: center;
