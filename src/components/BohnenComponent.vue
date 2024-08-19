@@ -22,7 +22,7 @@
         editMode.value = !editMode.value
 
         // updates database if left edit mode
-        if (!editMode.value){
+        if (!editMode.value){            
             updateData();
         }
     }
@@ -32,7 +32,7 @@
     }
 
     function updateData(){        
-        if (!editMode.value) return;
+        if (editMode.value == null) return;
         APIConnector.updateBohnen(identifier, data).then(()=> identifier = data.Name);
     }
 
