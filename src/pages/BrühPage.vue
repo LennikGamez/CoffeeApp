@@ -131,6 +131,10 @@
             ID = brühung.BrühID;
         }        
         APIConnector.saveAsRecipe(formData.get("method") as string, formData.get("bohne") as string, ID)
+
+        success('recipe-created', 'Rezept für ' + formBrühung.BohnenName + ' und ' + formBrühung.BrühmethodenName + ' gespeichert'); setTimeout(()=>{
+                release('success', 'recipe-created')
+            }, 2000)
     }
 
     function resetInfo(){
@@ -176,7 +180,7 @@
             </div>
             <div id="button-wrapper">
                 <StartButton ref="startButton"/>
-                <LikeButton @click="saveAsRecipe"/>
+                <LikeButton @click="saveAsRecipe();"/>
             </div>
         </div>
         <div id="info-center">
