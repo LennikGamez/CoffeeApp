@@ -79,11 +79,19 @@
         const formData = new FormData(form.value);
         APIConnector.getRezept(formData.get("method") as string, formData.get("bohne") as string)
         .then((data) => {
+            // if empty object: no recipe found reset input fields
+            if (Object.keys(data).length == 0){
+                (form.value?.querySelector('input[name="bohnenmenge"]') as HTMLInputElement).value = '';
+                (form.value?.querySelector('input[name="mahlgrad"]') as HTMLInputElement).value = '';
+                (form.value?.querySelector('input[name="getränkemenge"]') as HTMLInputElement).value = '';
+                (form.value?.querySelector('input[name="brühtemperatur"]') as HTMLInputElement).value = '';
+                return;
+            };
             (form.value?.querySelector('input[name="bohnenmenge"]') as HTMLInputElement).value = data.BohnenMenge.toString();
             (form.value?.querySelector('input[name="mahlgrad"]') as HTMLInputElement).value = data.Mahlgrad.toString();
             (form.value?.querySelector('input[name="getränkemenge"]') as HTMLInputElement).value = data.GetränkeMenge.toString();
             (form.value?.querySelector('input[name="brühtemperatur"]') as HTMLInputElement).value = data.Brühtemperatur.toString();
-        })
+        });
         
 
     }
