@@ -132,6 +132,13 @@ import InfoComponent from '../components/InfoComponent.vue';
         padding-bottom: 16px;
     }
 
+    #info-center{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
     .flex-div{
         position: relative;
         display: flex;

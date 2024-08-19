@@ -19,19 +19,27 @@
 
     #info-component {
         display: flex;
+        justify-content: center;
         align-items: center;
 
         font-family: "Nunito", sans-serif;
         font-weight: 500;
-        font-size: 1.5rem;
+        font-size: 1.1rem;
+
+        margin: 16px;
 
         padding: 8px;
+
+        width: 75vw;
+        max-width: fit-content;
+
+        border-radius: 16px;
     }
 
 
     .status {
         width: 2rem;
-        height: 2rem;
+        aspect-ratio: 1 / 1;
         border-radius: 50%;
         background-color: brown;
     }
