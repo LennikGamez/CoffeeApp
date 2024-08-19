@@ -40,7 +40,13 @@ import InfoComponent from '../components/InfoComponent.vue';
         e.preventDefault();
         if (!form.value) return;
         const formData = new FormData(form.value);
-        startButton.value?.start(formData);
+        const succ = startButton.value?.start(formData);
+        if(succ){
+            success("erfolgreich", "Brühung erfolgreich hinzugefügt!");
+            setTimeout(() => {
+                release("success", "erfolgreich");
+            }, 2000)
+        }
     }
 
     function checkBeanCount(event: Event){
@@ -55,7 +61,7 @@ import InfoComponent from '../components/InfoComponent.vue';
                 event.preventDefault();
             }
             else if (data - beansToBeUsed >= 0 && data-beansToBeUsed <= 20) {
-                warn("beans-low", "Nicht genug Bohnen. Es sind nur " + data + " Bohnen vorhanden. Es gibt nur noch " + (data - beansToBeUsed) + " Bohnen.");
+                warn("beans-low", " Es werden nur noch " + (data- beansToBeUsed) + " Bohnen vorhanden sein. Es gibt nur noch " + data + " Bohnen.");
             }
             else{
                 release("warnings", "beans-low");

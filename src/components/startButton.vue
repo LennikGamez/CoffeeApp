@@ -17,6 +17,8 @@ import APIConnector from '../util/APIConnector';
         }
         appendBrühung(brühung);
         reduceBeans(brühung.BohnenName, brühung.BohnenMenge);
+
+        return true;
     }
 
     function appendBrühung(b: Brühung) {
