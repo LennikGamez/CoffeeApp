@@ -8,5 +8,17 @@ type Bohne = {
 }
 
 
+type Brühung = {
+    BrühID: number,
+    BohnenName: string,
+    BrühmethodenName: string,
+    GetränkeMenge: number,
+    Mahlgrad: number,
+    BohnenMenge: number,
+    Brühtemperatur: number
+    zubereitet: boolean,
+    Notiz: string
+}
 
-export type { Bohne }
+
+export type { Bohne, Brühung }

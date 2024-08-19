@@ -1,11 +1,12 @@
 <script lang="ts" setup>
     import SelectComponent from '../components/selectComponent.vue';
-import APIConnector from '../util/APIConnector';
+import StartButton from '../components/startButton.vue';
+    import APIConnector from '../util/APIConnector';
 </script>
 
 
 <template>
-    <div id="brüh-page">
+    <form id="brüh-page" @submit.prevent>
         <div id="selection-area" class="section-wrapper">
             <h1>Brühung</h1>
             <div class="flex-div">
@@ -19,13 +20,14 @@ import APIConnector from '../util/APIConnector';
                 Rezept
             </h1>
             <div id="recipe-inputs" class="flex-div">
-                <input placeholder="Bohnenmenge"/>
-                <input placeholder="Mahlgrad"/>
-                <input placeholder="Getränkemenge"/>
-                <input placeholder="Brühtemperatur"/>
+                <input name="bohnenmenge" placeholder="Bohnenmenge"/>
+                <input name="mahlgrad" placeholder="Mahlgrad"/>
+                <input name="getränkemenge" placeholder="Getränkemenge"/>
+                <input name= "brühtemperatur" placeholder="Brühtemperatur"/>
             </div>
+            <StartButton @click="appendBrühung"/>
         </div>
-    </div>
+    </form>
 </template>
 
 
@@ -40,19 +42,17 @@ import APIConnector from '../util/APIConnector';
         flex-direction: column;
         height: 100%;
 
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
     }
 
     #brüh-page > *{
         margin: 0;
         width: 100%;
-        height: 100%;
     }
 
     #selection-area{
         position: relative;
-        flex: .5;
 
         border-bottom: 1px solid var(--secondary-text-color);
 

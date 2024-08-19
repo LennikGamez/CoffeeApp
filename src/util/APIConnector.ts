@@ -1,4 +1,4 @@
-import { Bohne } from "../DB-Models";
+import { Bohne, Brühung } from "../DB-Models";
 
 class APIConnector{
     static SERVER = "http://localhost:3000"; 
@@ -53,6 +53,45 @@ class APIConnector{
     public static async getBohnenNames(): Promise<string[]>{
         const resp = await fetch(APIConnector.endpoint("/beannames"));
         return await resp.json() as string[];
+    }
+
+    public static async addBrühung(brühung: Brühung): Promise<boolean>{
+        const resp = await fetch(APIConnector.endpoint("/brew"), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(brühung)
+        })
+        return await resp.ok;
+    }
+
+    public static async doesBrühungExist(brühung: Brühung): Promise<boolean>{
+        const resp = await fetch(APIConnector.endpoint("/brew-exists"), {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(brühung)
+        })
+        const data: Brühung[] = await resp.json();
+        if (data.length > 0) {
+            APIConnector.addToBrühung(data[0]);
+            return true;
+        }else{
+            APIConnector.addBrühung(brühung);
+            return false;
+        }
+    }
+    public static async addToBrühung(brühung: Brühung): Promise<boolean>{
+        const resp = await fetch(APIConnector.endpoint("/brew-count"), {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(brühung)
+        });
+        return await resp.ok;
     }
 }
 
