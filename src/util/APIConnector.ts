@@ -45,6 +45,11 @@ class APIConnector{
         return await resp.json() as Bohne;
     }
 
+    public static async getBohnenCount(name: string): Promise<number>{
+        const resp = await fetch(APIConnector.endpoint("/beans-count/" + name));
+        return await resp.json() as number;
+    }
+
     public static async getMethods(): Promise<string[]>{
         const resp = await fetch(APIConnector.endpoint("/methods"));
         return await resp.json() as string[];
@@ -81,6 +86,7 @@ class APIConnector{
             APIConnector.addToBrühung(data[0]);
             return true;
         }else{
+            brühung.zubereitet++;
             APIConnector.addBrühung(brühung);
             return false;
         }
@@ -92,6 +98,18 @@ class APIConnector{
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(brühung)
+        });
+        return await resp.ok;
+    }
+
+
+    public static async reduceBeanCount(name: string, count: number): Promise<boolean>{
+        const resp = await fetch(APIConnector.endpoint("/reduce-bean"), {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({BohnenName: name, BohnenMenge: count})
         });
         return await resp.ok;
     }

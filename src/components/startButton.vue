@@ -16,15 +16,15 @@ import APIConnector from '../util/APIConnector';
             Notiz: ""
         }
         appendBrühung(brühung);
-        reduceBeans();
+        reduceBeans(brühung.BohnenName, brühung.BohnenMenge);
     }
 
     function appendBrühung(b: Brühung) {
         APIConnector.doesBrühungExist(b);
     }
 
-    function reduceBeans(){
-
+    function reduceBeans(name: string, menge: number) {
+        APIConnector.reduceBeanCount(name, menge);
     }
 
     defineExpose({start})
