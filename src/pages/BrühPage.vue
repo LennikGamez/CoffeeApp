@@ -218,8 +218,6 @@
     #brüh-page{
         display: flex;
         flex-direction: column;
-        flex: 1;
-        overflow-y: scroll;
 
         justify-content: center;
         align-items: center;
