@@ -6,7 +6,8 @@
 <template>
     <nav>
         <RouterLink to="/" class="route">Bezug</RouterLink>
-        <RouterLink to="/add" class="route">Bohnen</RouterLink>
+        <RouterLink to="/beans" class="route">Bohnen</RouterLink>
+        <RouterLink to="/brews" class="route">Brühungen</RouterLink>
     </nav>
 </template>
 
