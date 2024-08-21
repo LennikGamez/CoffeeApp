@@ -17,9 +17,6 @@
         display: flex;
         justify-content: space-around;
         
-        position: fixed;
-        bottom: 0;
-        left: 0;
 
         width: 100%;
         border-top: 1px solid var(--secondary-text-color);
@@ -34,7 +31,6 @@
 
         transition: background-color 0.3s;
         padding: 16px;
-
     }
 
     .route:hover{
