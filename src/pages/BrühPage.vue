@@ -225,6 +225,12 @@
         align-items: center;
     }
 
+    @media screen and (max-width: 767px){
+        #brüh-page{
+            justify-content: start;
+        }
+    }
+
     #brüh-page > *{
         margin: 0;
         width: 100%;
@@ -243,6 +249,8 @@
         flex-direction: column;
         gap: 1rem;
         align-items: center;
+        position: fixed;
+        top: 0;
     }
 
     .flex-div{

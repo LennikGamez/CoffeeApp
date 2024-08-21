@@ -40,7 +40,7 @@ h1 {
 }
 
 html{
-  height: 100vh;
+  height: 100dvh;
 }
 
 #app, body{
