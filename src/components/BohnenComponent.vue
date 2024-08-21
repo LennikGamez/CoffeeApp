@@ -50,7 +50,7 @@
         <input v-model="data.Name" :readonly="!editMode" @change="updateData"/>
         <input v-model="data.VorhandendeMenge" type="number" :readonly="!editMode"/>
         <input v-model="data.Röster" :readonly="!editMode"/>
-        <input v-model="data.Website" v-if="data.Website && editMode"/></input>
+        <input v-model="data.Website" v-if="editMode"/></input>
         <a v-if="data.Website && !editMode" :href="data.Website">Website</a>
         <textarea v-model="data.Notiz" :readonly="!editMode"/>
 
@@ -74,9 +74,18 @@
 
     input, textarea {
         padding: 8px;
-        background-color: hsla(0, 0%, 50%, 0.2);
+        background-color: var(--primary-color);
         border: none;
-        color: black;
+        color: var(--primary-text-color);
         width: fit-content;
+    }
+
+    button{
+        background-color: var(--contrast-color);
+        width: fit-content;
+        align-self: center;
+        padding: 8px 32px;
+        border: none;
+        outline: none;
     }
 </style>
