@@ -13,9 +13,18 @@ import { Brühung } from '../DB-Models';
             <img src="../assets/delete.svg"/>
         </button>
         <h2>{{ props.data.BrühmethodenName }} - {{ props.data.BohnenName }}</h2>
-        <input :value="props.data.Bohnenmenge + ' g'" required/>
-        <input :value="props.data.Getränkemenge + ' g'" required/>
-        <input :value="props.data.Brühtemperatur + '°C'" required/>
+        <label>
+            Bohnenmenge
+            <span>{{ props.data.Bohnenmenge + ' g' }}</span>
+        </label>
+        <label>
+            Getränkemenge
+            <span>{{ props.data.Getränkemenge + ' g' }}</span>
+        </label>
+        <label>
+            Brühtemperatur
+            <span>{{ props.data.Brühtemperatur + '°C' }}</span>
+        </label>
 
     </div>
 </template>
@@ -32,19 +41,32 @@ import { Brühung } from '../DB-Models';
         padding: 10px;
 
         width: 60%;
+        max-width: 32rem;
+        gap: 4px;
         
         box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.226);
 
         background-color: hsla(29, 69%, 43%, 0.507);
     }
 
-    input{
+    label{
+        display: flex;
+        flex-direction: column;
+
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    span{
+        color: var(--primary-text-color);
         padding: 8px;
         margin: 4px;
         font-size: .92rem;
         border-radius: var(--border-radius);
         outline: none;
         border: none;
+
+        text-align: center;
 
         background-color: var(--primary-color);
     }
