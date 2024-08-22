@@ -1,21 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 :root {
   
-
-  font-family: "Nunito", sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: black;
-  background-color: hsl(0, 100%, 99%, 0.98);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-
   --contrast-color : hsl(25, 100%, 50%);
   --primary-color: hsl(25, 100%, 19%);
   --secondary-color: hsl(25, 70%, 25%);
@@ -29,6 +14,20 @@
   --warning-color: hsl(54, 100%, 50%);
   --error-color: hsl(3, 100%, 50%);
   --success-color: hsl(120, 100%, 50%);
+
+  font-family: "Nunito", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: black;
+  background-color: var(--bg-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
 
 }
 
