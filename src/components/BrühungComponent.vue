@@ -65,7 +65,7 @@ import APIConnector from '../util/APIConnector';
 
         <label>
             Mahlgrad
-            <span>{{ props.data.Mahlgrad + ' %' }}</span>
+            <span>{{ props.data.Mahlgrad }}</span>
         </label>
 
         <label v-if="props.data.Notiz">

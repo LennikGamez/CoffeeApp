@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { onMounted, Ref, ref } from 'vue';
+    import { Ref, ref } from 'vue';
     import SelectComponent from '../components/selectComponent.vue';
     import StartButton from '../components/startButton.vue';
     import APIConnector from '../util/APIConnector';
@@ -165,17 +165,32 @@
                 Rezept
             </h1>
             <div id="recipe-inputs" class="flex-div">
-                <label for="Bohnenmenge">Bohnenmenge
-                    <input ref="Bohnenmenge" required name="Bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
+                <label for="Bohnenmenge">
+                    Bohnenmenge
+                    <div>
+                        <input ref="Bohnenmenge" required name="Bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
+                        g
+                    </div>
                 </label>
-                <label for="mahlgrad">Mahlgrad
-                    <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad"/>
+                <label for="mahlgrad">
+                    Mahlgrad
+                    <div>
+                        <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad"/>
+                    </div>
                 </label>
-                <label for="Getränkemenge">Getränkemenge
-                    <input ref="Getränkemenge" required name="Getränkemenge" placeholder="Getränkemenge"/>
+                <label for="Getränkemenge">
+                    Getränkemenge
+                    <div>
+                        <input ref="Getränkemenge" required name="Getränkemenge" placeholder="Getränkemenge"/>
+                        g
+                    </div>
                 </label>
-                <label for="brühtemperatur">Brühtemperatur
-                    <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>
+                <label for="brühtemperatur">
+                    Brühtemperatur
+                    <div>
+                        <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>
+                        <span>°C</span>
+                    </div>
                 </label>
             </div>
             <div id="button-wrapper">
@@ -209,6 +224,7 @@
         gap: .5rem;
         justify-content: center;
         align-items: center;
+        margin-bottom: 16px;
     }
 
     h1{
@@ -294,5 +310,13 @@
         font-weight: bold;
         background-color: var(--primary-color);    
 
+    }
+
+    @media screen and (max-width: 767px){
+        #recipe-inputs{
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+        }
     }
 </style>

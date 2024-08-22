@@ -52,7 +52,7 @@
             <input v-model="data.Name" :readonly="!editMode" @change="updateData"/>
         </label>
         <label>
-            Menge
+            Menge in g
             <input v-model="data.VorhandendeMenge" type="number" :readonly="!editMode"/>
         </label>
         <label>
