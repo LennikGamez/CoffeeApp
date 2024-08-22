@@ -1,8 +1,37 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { Brühung } from '../DB-Models';
+import APIConnector from '../util/APIConnector';
 
-    const emit = defineEmits(['delete']);
+    const emit = defineEmits(['delete', 'like']);
     const props = defineProps<{data: Brühung}>()
+
+    const liked = ref(false);
+
+    function handleLikeClick(){
+        if(liked.value){
+            APIConnector.deleteRecipe(props.data.BrühmethodenName, props.data.BohnenName).then((resp) => {
+                if(resp) liked.value = false
+            });
+        }else{
+            setAsRecipe();
+        }
+    }
+
+
+    function setAsRecipe(){
+        APIConnector.saveAsRecipe(props.data.BrühmethodenName, props.data.BohnenName, props.data.BrühID).then((resp) => {
+            if(resp) liked.value = true
+        });
+    }
+
+    function isLiked(){
+        APIConnector.getRezept(props.data.BrühmethodenName, props.data.BohnenName).then((data) => {
+            if(data.BrühID == props.data.BrühID) liked.value = true
+        })
+    }
+
+    isLiked();
 
 </script>
 
@@ -12,6 +41,12 @@ import { Brühung } from '../DB-Models';
         <button id="delete-button" @click="emit('delete', props.data.BrühID)">
             <img src="../assets/delete.svg"/>
         </button>
+
+        <button id="like-button" :class="liked ? 'liked' : 'unliked'" @click="handleLikeClick">
+            <img class="unliked-icon" src="../assets/favorite.svg"/>
+            <img class="liked-icon" src="../assets/favchecked.svg"/>
+        </button>
+
         <h2>{{ props.data.BrühmethodenName }} - {{ props.data.BohnenName }}</h2>
         <label>
             Bohnenmenge
@@ -83,4 +118,25 @@ import { Brühung } from '../DB-Models';
         padding: 0;
         display: flex;
     }
+
+    #like-button{
+        background-color: transparent;
+        border: none;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 4px;
+        padding: 0;
+        display: flex;
+    }
+
+    .liked-icon, .unliked-icon{
+        display: none;
+    }
+
+    #like-button.liked .liked-icon, #like-button.unliked .unliked-icon{
+        display: block;
+    }
+
 </style>

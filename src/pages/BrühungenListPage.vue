@@ -28,6 +28,7 @@ import { Brühung } from '../DB-Models';
             <BrühungComponent v-for="brew in brews" 
                 :data = "brew"
                 @delete="deleteBrew"
+                @like="fetchBrews"
             />
         </div>
     </div>

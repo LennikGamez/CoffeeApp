@@ -134,6 +134,14 @@ class APIConnector{
         });        
         return await resp.ok;
     }
+
+
+    public static async deleteRecipe(methode: string, bohne: string): Promise<boolean>{
+        const resp = await fetch(APIConnector.endpoint("/rezept/" + methode + "/" + bohne), {
+            method: "DELETE"
+        })
+        return await resp.ok;
+    }
 }
 
 
