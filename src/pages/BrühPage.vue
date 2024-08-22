@@ -235,7 +235,7 @@
         display: flex;
         flex-direction: column;
 
-        justify-content: center;
+        justify-content: start;
         align-items: center;
     }
 
@@ -279,7 +279,7 @@
     .section-wrapper{
         display: flex;
         flex-direction: column;
-        gap: 2.8rem;
+        gap: 1.8rem;
         justify-content: start;
         align-items: center;
     }
