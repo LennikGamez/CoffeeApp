@@ -4,7 +4,8 @@ type Bohne = {
     Röster: string,
     Website: string,
     Notiz: string,
-    VorhandendeMenge: number | null
+    VorhandendeMenge: number | null,
+    Röstgrad: number | null;
 }
 
 

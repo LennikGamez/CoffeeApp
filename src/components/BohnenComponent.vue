@@ -13,7 +13,8 @@
         Röster: props.data.Röster,
         Website: props.data.Website,
         Notiz: props.data.Notiz,
-        VorhandendeMenge: props.data.VorhandendeMenge
+        VorhandendeMenge: props.data.VorhandendeMenge,
+        Röstgrad: props.data.Röstgrad
     } as Bohne;
 
     const editMode: Ref<boolean> = ref(props.editMode);
@@ -58,6 +59,10 @@
         <label>
             Röster
             <input v-model="data.Röster" :readonly="!editMode"/>
+        </label>
+        <label>
+            Röstgrad
+            <input v-model="data.Röstgrad" type="number" :readonly="!editMode"/>
         </label>
         <label v-if="editMode">
             Website
