@@ -7,7 +7,7 @@
 
   --primary-text-color: hsl(0, 0%, 100%);
   --secondary-text-color: hsl(25, 0%, 58%); 
-  --bg-color: hsl(0, 100%, 99%, 0.98);
+  --bg-color: hsla(0, 100%, 99%, 0.98);
 
   --border-radius: 4px;
 
