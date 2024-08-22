@@ -123,7 +123,7 @@ import APIConnector from '../util/APIConnector';
         border: none;
 
         text-align: center;
-
+        font-weight: 800;
         background-color: var(--primary-color);
     }
 

@@ -39,7 +39,7 @@
             />
         </div>
 
-        <AddButton id="add" @click="addBohnenData({Name: 'Neue Bohne', Röster: 'Röster', Website: 'Website', Notiz: 'Notiz', VorhandendeMenge: 0} as BohnenType)" />
+        <AddButton id="add" @click="addBohnenData({Name: 'Neue Bohne', Röster: '', Website: '', Notiz: '', VorhandendeMenge: null} as BohnenType)" />
     </div>
 </template>
 

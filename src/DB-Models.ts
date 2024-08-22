@@ -4,7 +4,7 @@ type Bohne = {
     Röster: string,
     Website: string,
     Notiz: string,
-    VorhandendeMenge: number
+    VorhandendeMenge: number | null
 }
 
 

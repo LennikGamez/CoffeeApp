@@ -275,6 +275,7 @@
         border-radius: var(--border-radius);
 
         padding: 8px 16px;
+        font-weight: 800;
     }
 
     input{

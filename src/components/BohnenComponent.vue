@@ -47,12 +47,27 @@
 
 <template>
     <div class="bohnen-component">
-        <input v-model="data.Name" :readonly="!editMode" @change="updateData"/>
-        <input v-model="data.VorhandendeMenge" type="number" :readonly="!editMode"/>
-        <input v-model="data.Röster" :readonly="!editMode"/>
-        <input v-model="data.Website" v-if="editMode"/></input>
+        <label>
+            Name
+            <input v-model="data.Name" :readonly="!editMode" @change="updateData"/>
+        </label>
+        <label>
+            Menge
+            <input v-model="data.VorhandendeMenge" type="number" :readonly="!editMode"/>
+        </label>
+        <label>
+            Röster
+            <input v-model="data.Röster" :readonly="!editMode"/>
+        </label>
+        <label v-if="editMode">
+            Website
+            <input v-model="data.Website"/></input>
+        </label>
         <a v-if="data.Website && !editMode" :href="data.Website">Website</a>
-        <textarea v-model="data.Notiz" :readonly="!editMode"/>
+        <label>
+            Notiz
+            <textarea v-model="data.Notiz" :readonly="!editMode"/>
+        </label>
 
         <button @click="toggleEditMode">{{ editMode ? "Save" : "Edit" }}</button>
         <button @click="deleteBohne" id="delete">Delete</button>
@@ -62,7 +77,7 @@
 
 <style scoped>
     .bohnen-component {
-        border: 1px solid rgba(0, 0, 0, 0.24);
+        background-color: hsla(29, 69%, 43%, 0.507);
         padding: 10px;
         display: flex;
         flex-direction: column;
@@ -96,9 +111,24 @@
         border: none;
         outline: none;
         border-radius: var(--border-radius);
+        font-weight: 800;
+
+        cursor: pointer;
+    }
+
+    a{
+        color: white;
+        font-weight: 800;
     }
 
     #delete{
         background-color: red;
+    }
+
+    label{
+        display: flex;
+        flex-direction: column;
+        font-size: larger;
+        font-weight: 800;
     }
 </style>
