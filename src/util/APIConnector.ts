@@ -93,6 +93,17 @@ class APIConnector{
         return await resp.ok;
     }
 
+    public static async removeBrühung(id: number): Promise<boolean>{
+        const resp = await fetch(APIConnector.endpoint("/brew"), {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({id: id})
+        })
+        return await resp.ok;
+    }
+
 
     public static async reduceBeanCount(name: string, count: number): Promise<boolean>{
         const resp = await fetch(APIConnector.endpoint("/reduce-bean"), {
