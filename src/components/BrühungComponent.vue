@@ -100,6 +100,14 @@ import APIConnector from '../util/APIConnector';
         background-color: hsla(29, 69%, 43%, 0.507);
     }
 
+    @media screen and (max-width: 485px) {
+        #mengen{
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+
     #mengen{
         display: flex;
         gap: 16px;
