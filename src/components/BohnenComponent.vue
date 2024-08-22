@@ -55,18 +55,24 @@
         <textarea v-model="data.Notiz" :readonly="!editMode"/>
 
         <button @click="toggleEditMode">{{ editMode ? "Save" : "Edit" }}</button>
-        <button @click="deleteBohne">Delte</button>
+        <button @click="deleteBohne" id="delete">Delete</button>
     </div>
 </template>
 
 
 <style scoped>
     .bohnen-component {
-        border: 1px solid black;
+        border: 1px solid rgba(0, 0, 0, 0.24);
         padding: 10px;
         display: flex;
         flex-direction: column;
+        align-items: center;
 
+        width: fit-content;
+
+        border-radius: var(--border-radius);
+
+        box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.226);
         &>* {
             margin: 5px;
         }
@@ -78,6 +84,8 @@
         border: none;
         color: var(--primary-text-color);
         width: fit-content;
+        font-size: larger;
+        border-radius: var(--border-radius);
     }
 
     button{
@@ -87,5 +95,10 @@
         padding: 8px 32px;
         border: none;
         outline: none;
+        border-radius: var(--border-radius);
+    }
+
+    #delete{
+        background-color: red;
     }
 </style>

@@ -31,17 +31,41 @@
 <template>
     <div id="bohnen-page">
         <h1>Bohnen</h1>
-        <Bohne v-for="(item, index) in bohnenDataRef" :key="index"
-            :data = "item"
-            :editMode="false"
-            @deleted="deleteBohne(item)"
-        />
+        <div id="bohnen-list">
+            <Bohne v-for="(item, index) in bohnenDataRef" :key="index"
+                :data = "item"
+                :editMode="false"
+                @deleted="deleteBohne(item)"
+            />
+        </div>
 
-        <AddButton @click="addBohnenData({Name: 'Neue Bohne', Röster: 'Röster', Website: 'Website', Notiz: 'Notiz', VorhandendeMenge: 0} as BohnenType)" />
+        <AddButton id="add" @click="addBohnenData({Name: 'Neue Bohne', Röster: 'Röster', Website: 'Website', Notiz: 'Notiz', VorhandendeMenge: 0} as BohnenType)" />
     </div>
 </template>
 
 
-<style>
+<style scoped>
+    #bohnen-page{
+        display: flex;
+        flex-direction: column;
+    }
+    #bohnen-list{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        align-items: center;
+        justify-content: center;
+        
+    }
 
+    #add{
+        align-self: center;
+
+        width: fit-content;
+        padding: 16px;
+        aspect-ratio: 1;
+
+        background-color: var(--secondary-color);
+        margin: 16px;
+    }
 </style>
