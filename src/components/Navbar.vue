@@ -5,9 +5,15 @@
 
 <template>
     <nav>
-        <RouterLink to="/" class="route">Bezug</RouterLink>
-        <RouterLink to="/beans" class="route">Bohnen</RouterLink>
-        <RouterLink to="/brews" class="route">Brühungen</RouterLink>
+        <RouterLink to="/" class="route">
+            <img src="../assets/navbar/coffeemug.svg"/>
+        </RouterLink>
+        <RouterLink to="/beans" class="route">
+            <img src="../assets/navbar/beans.svg"/>
+        </RouterLink>
+        <RouterLink to="/brews" class="route">
+            <img src="../assets/navbar/history.svg"/>
+        </RouterLink>
     </nav>
 </template>
 
@@ -32,6 +38,9 @@
 
         transition: background-color 0.3s;
         padding: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .route:hover{
