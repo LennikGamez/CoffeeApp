@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { ref } from 'vue';
     import APIConnector from '../util/APIConnector';
+    import BrühungComponent from '../components/BrühungComponent.vue';
 
 
     const brews = ref([]);
@@ -17,6 +18,8 @@
 
     <div id="brews-page">
         <h1>Brühungen</h1>
-        <h4 v-for="brew in brews">{{ brew }}</h4>
+        <BrühungComponent v-for="brew in brews" 
+            :data = "brew"
+        />
     </div>
 </template>

@@ -12,9 +12,9 @@ type Brühung = {
     BrühID: number,
     BohnenName: string,
     BrühmethodenName: string,
-    GetränkeMenge: number,
+    Getränkemenge: number,
     Mahlgrad: number,
-    BohnenMenge: number,
+    Bohnenmenge: number,
     Brühtemperatur: number
     zubereitet: number,
     Notiz: string

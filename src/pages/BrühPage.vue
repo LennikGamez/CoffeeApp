@@ -55,7 +55,7 @@
     function checkBeanCount(event: Event | null = null){
         if (!form.value) return;
         const formData = new FormData(form.value);
-        const beansToBeUsed = parseInt(formData.get("bohnenmenge") as string);
+        const beansToBeUsed = parseInt(formData.get("Bohnenmenge") as string);
 
         APIConnector.getBohnenCount(formData.get("bohne") as string)
         .then((data) => {
@@ -84,15 +84,15 @@
         .then((data) => {
             // if empty object: no recipe found reset input fields
             if (Object.keys(data).length == 0){
-                (form.value?.querySelector('input[name="bohnenmenge"]') as HTMLInputElement).value = '';
+                (form.value?.querySelector('input[name="Bohnenmenge"]') as HTMLInputElement).value = '';
                 (form.value?.querySelector('input[name="mahlgrad"]') as HTMLInputElement).value = '';
-                (form.value?.querySelector('input[name="getränkemenge"]') as HTMLInputElement).value = '';
+                (form.value?.querySelector('input[name="Getränkemenge"]') as HTMLInputElement).value = '';
                 (form.value?.querySelector('input[name="brühtemperatur"]') as HTMLInputElement).value = '';
                 return;
             };
-            (form.value?.querySelector('input[name="bohnenmenge"]') as HTMLInputElement).value = data.BohnenMenge.toString();
+            (form.value?.querySelector('input[name="Bohnenmenge"]') as HTMLInputElement).value = data.Bohnenmenge.toString();
             (form.value?.querySelector('input[name="mahlgrad"]') as HTMLInputElement).value = data.Mahlgrad.toString();
-            (form.value?.querySelector('input[name="getränkemenge"]') as HTMLInputElement).value = data.GetränkeMenge.toString();
+            (form.value?.querySelector('input[name="Getränkemenge"]') as HTMLInputElement).value = data.Getränkemenge.toString();
             (form.value?.querySelector('input[name="brühtemperatur"]') as HTMLInputElement).value = data.Brühtemperatur.toString();
             
             checkBeanCount();
@@ -109,8 +109,8 @@
         }
         const formData = new FormData(form.value);
         const formBrühung: Brühung = {
-            BohnenMenge: parseInt(formData.get("bohnenmenge") as string),
-            GetränkeMenge: parseInt(formData.get("getränkemenge") as string),
+            Bohnenmenge: parseInt(formData.get("Bohnenmenge") as string),
+            Getränkemenge: parseInt(formData.get("Getränkemenge") as string),
             Mahlgrad: parseInt(formData.get("mahlgrad") as string),
             Brühtemperatur: parseInt(formData.get("brühtemperatur") as string),
             BrühmethodenName: formData.get("method") as string,
@@ -165,14 +165,14 @@
                 Rezept
             </h1>
             <div id="recipe-inputs" class="flex-div">
-                <label for="bohnenmenge">Bohnenmenge
-                    <input ref="bohnenmenge" required name="bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
+                <label for="Bohnenmenge">Bohnenmenge
+                    <input ref="Bohnenmenge" required name="Bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
                 </label>
                 <label for="mahlgrad">Mahlgrad
                     <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad"/>
                 </label>
-                <label for="getränkemenge">Getränkemenge
-                    <input ref="getränkemenge" required name="getränkemenge" placeholder="Getränkemenge"/>
+                <label for="Getränkemenge">Getränkemenge
+                    <input ref="Getränkemenge" required name="Getränkemenge" placeholder="Getränkemenge"/>
                 </label>
                 <label for="brühtemperatur">Brühtemperatur
                     <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>

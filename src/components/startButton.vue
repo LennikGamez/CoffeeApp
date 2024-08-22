@@ -8,15 +8,15 @@ import APIConnector from '../util/APIConnector';
             BrühID: -1,
             BohnenName: formData.get("bohne") as string,
             BrühmethodenName: formData.get("method") as string,
-            GetränkeMenge: parseInt(formData.get("getränkemenge") as string),
+            Getränkemenge: parseInt(formData.get("Getränkemenge") as string),
             Mahlgrad: parseInt(formData.get("mahlgrad") as string),
-            BohnenMenge: parseInt(formData.get("bohnenmenge") as string),
+            Bohnenmenge: parseInt(formData.get("Bohnenmenge") as string),
             Brühtemperatur: parseInt(formData.get("brühtemperatur") as string),
             zubereitet: 0,
             Notiz: ""
         }
         appendBrühung(brühung);
-        reduceBeans(brühung.BohnenName, brühung.BohnenMenge);
+        reduceBeans(brühung.BohnenName, brühung.Bohnenmenge);
 
         return true;
     }

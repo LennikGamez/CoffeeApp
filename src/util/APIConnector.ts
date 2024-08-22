@@ -100,7 +100,7 @@ class APIConnector{
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({BohnenName: name, BohnenMenge: count})
+            body: JSON.stringify({BohnenName: name, Bohnenmenge: count})
         });
         return await resp.ok;
     }
