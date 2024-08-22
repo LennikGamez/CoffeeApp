@@ -48,19 +48,35 @@ import APIConnector from '../util/APIConnector';
         </button>
 
         <h2>{{ props.data.BrühmethodenName }} - {{ props.data.BohnenName }}</h2>
-        <label>
-            Bohnenmenge
-            <span>{{ props.data.Bohnenmenge + ' g' }}</span>
-        </label>
-        <label>
-            Getränkemenge
-            <span>{{ props.data.Getränkemenge + ' g' }}</span>
-        </label>
+        <div id="mengen">
+            <label>
+                Bohnenmenge
+                <span>{{ props.data.Bohnenmenge + ' g' }}</span>
+            </label>
+            <label>
+                Getränkemenge
+                <span>{{ props.data.Getränkemenge + ' g' }}</span>
+            </label>
+        </div>
         <label>
             Brühtemperatur
             <span>{{ props.data.Brühtemperatur + '°C' }}</span>
         </label>
 
+        <label>
+            Mahlgrad
+            <span>{{ props.data.Mahlgrad + ' %' }}</span>
+        </label>
+
+        <label v-if="props.data.Notiz">
+            Notiz
+            <span>{{ props.data.Notiz }}</span>
+        </label>
+
+        <label>
+            Zubereitet
+            <span>{{ props.data.zubereitet }}x</span>
+        </label>
     </div>
 </template>
 
@@ -82,6 +98,11 @@ import APIConnector from '../util/APIConnector';
         box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.226);
 
         background-color: hsla(29, 69%, 43%, 0.507);
+    }
+
+    #mengen{
+        display: flex;
+        gap: 16px;
     }
 
     label{
