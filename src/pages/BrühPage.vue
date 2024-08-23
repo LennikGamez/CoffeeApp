@@ -61,6 +61,9 @@
         .then((data) => {
             if (data - beansToBeUsed < 0) {
                 throwError("beans-low", "Bitte fülle die Bohnen nach. Es sind nur " + data + "g Bohnen vorhanden.");
+                setTimeout(()=>{
+                    release("errors", "beans-low");
+                }, 5000)
                 if (event) event.preventDefault();
             }else{
                 release("errors", "beans-low");
