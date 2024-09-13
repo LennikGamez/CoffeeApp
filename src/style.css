@@ -8,6 +8,7 @@
   --primary-text-color: hsl(0, 0%, 100%);
   --secondary-text-color: hsl(25, 0%, 58%); 
   --bg-color: hsla(0, 100%, 99%, 0.98);
+  --heading-color: hsl(25, 100%, 19%);
 
   --border-radius: 4px;
 
@@ -19,7 +20,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
   color: black;
   background-color: var(--bg-color);
 
@@ -34,7 +34,7 @@
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  color: hsl(25, 100%, 19%);
+  color: var(--heading-color);
 
 }
 
@@ -60,4 +60,15 @@ html{
 #app *{
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+
+
+/* Dark mode */
+.dark{
+    color: white;
+    --bg-color: hsl(30, 6%, 20%);
+    --primary-color: hsla(25, 69%, 46%, 0.507);
+    --heading-color: hsl(25, 89%, 82%);;
+
 }
