@@ -47,13 +47,3 @@ import APIConnector from '../util/APIConnector';
     <input type="submit">
     </input>
 </template>
-
-
-<style scoped>
-    input {
-        width: fit-content;
-        border-radius: 50px;
-        outline: none;
-        border: none;
-    }
-</style>

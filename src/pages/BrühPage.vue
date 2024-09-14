@@ -164,15 +164,15 @@
 
         </div>
         <div id="recipe" class="section-wrapper">
-            <h1>
-                Rezept
-            </h1>
-            <div id="recipe-inputs" class="flex-div">
+
+            <div id="recipe-inputs">
                 <label for="Bohnenmenge">
                     Bohnenmenge
                     <div>
                         <input ref="Bohnenmenge" required name="Bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
-                        g
+                        <span>
+                            g
+                        </span>
                     </div>
                 </label>
                 <label for="mahlgrad">
@@ -185,7 +185,9 @@
                     Getränkemenge
                     <div>
                         <input ref="Getränkemenge" required name="Getränkemenge" placeholder="Getränkemenge"/>
-                        g
+                        <span>
+                            g
+                        </span>
                     </div>
                 </label>
                 <label for="brühtemperatur">
@@ -197,7 +199,7 @@
                 </label>
             </div>
             <div id="button-wrapper">
-                <StartButton ref="startButton"/>
+                <StartButton ref="startButton" id="start-button"/>
                 <LikeButton @click="saveAsRecipe();"/>
             </div>
         </div>
@@ -219,11 +221,26 @@
 
         font-size: 1.3rem;
         font-weight: 600;
+        justify-content: center;
+        align-items: center;
+    }
+    label > div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+    }
+
+    label > div > span{
+        position: absolute;
+        right: 5px;
+        margin: 5px;
     }
 
     #button-wrapper{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: .5rem;
         justify-content: center;
         align-items: center;
@@ -232,6 +249,7 @@
 
     h1{
         text-align: center;
+        margin: 8px;;
     }
 
     #brüh-page{
@@ -300,6 +318,11 @@
     input{
         background-color: var(--primary-color);
         color: var(--primary-text-color);
+        text-align: center;
+    }
+
+    input:not(#start-button){
+        width: 50%;
     }
 
     input:hover{
@@ -317,9 +340,22 @@
 
     @media screen and (max-width: 767px){
         #recipe-inputs{
+            padding: 8px;
+            display: flex;
             flex-direction: column;
             align-items: start;
             justify-content: center;
+            gap: 1rem;
+       }
+    }
+
+    @media screen and (min-width: 768px){
+        /* bigger screens */
+        #recipe-inputs{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem; 
+            place-items: center;
         }
     }
 </style>
