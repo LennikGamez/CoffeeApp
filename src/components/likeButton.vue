@@ -13,10 +13,10 @@
 
 <style scoped>
     button{
-        border-radius: 50px;
+        border-radius: var(--border-radius);
         outline: none;
         border: none;
-        padding: 12px;
+        padding: 7px;
         aspect-ratio: 1;
 
         background-color: hsl(12, 50%, 50%, 0.5);
