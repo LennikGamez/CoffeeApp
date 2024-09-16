@@ -55,7 +55,7 @@
     function checkBeanCount(event: Event | null = null){
         if (!form.value) return;
         const formData = new FormData(form.value);
-        const beansToBeUsed = parseInt(formData.get("Bohnenmenge") as string);
+        const beansToBeUsed = parseFloat(formData.get("Bohnenmenge") as string);
 
         APIConnector.getBohnenCount(formData.get("bohne") as string)
         .then((data) => {
@@ -112,10 +112,10 @@
         }
         const formData = new FormData(form.value);
         const formBrühung: Brühung = {
-            Bohnenmenge: parseInt(formData.get("Bohnenmenge") as string),
-            Getränkemenge: parseInt(formData.get("Getränkemenge") as string),
-            Mahlgrad: parseInt(formData.get("mahlgrad") as string),
-            Brühtemperatur: parseInt(formData.get("brühtemperatur") as string),
+            Bohnenmenge: parseFloat(formData.get("Bohnenmenge") as string),
+            Getränkemenge: parseFloat(formData.get("Getränkemenge") as string),
+            Mahlgrad: parseFloat(formData.get("mahlgrad") as string),
+            Brühtemperatur: parseFloat(formData.get("brühtemperatur") as string),
             BrühmethodenName: formData.get("method") as string,
             BohnenName: formData.get("bohne") as string,
         } as Brühung;
@@ -178,7 +178,7 @@
                 <label for="mahlgrad">
                     Mahlgrad
                     <div>
-                        <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad"/>
+                        <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad" type="number" step="any"/>
                     </div>
                 </label>
                 <label for="Getränkemenge">
