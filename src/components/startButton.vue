@@ -8,10 +8,10 @@ import APIConnector from '../util/APIConnector';
             BrühID: -1,
             BohnenName: formData.get("bohne") as string,
             BrühmethodenName: formData.get("method") as string,
-            Getränkemenge: parseInt(formData.get("Getränkemenge") as string),
-            Mahlgrad: parseInt(formData.get("mahlgrad") as string),
-            Bohnenmenge: parseInt(formData.get("Bohnenmenge") as string),
-            Brühtemperatur: parseInt(formData.get("brühtemperatur") as string),
+            Getränkemenge: parseFloat(formData.get("Getränkemenge") as string),
+            Mahlgrad: parseFloat(formData.get("mahlgrad") as string),
+            Bohnenmenge: parseFloat(formData.get("Bohnenmenge") as string),
+            Brühtemperatur: parseFloat(formData.get("brühtemperatur") as string),
             zubereitet: 0,
             Notiz: ""
         }
