@@ -48,7 +48,9 @@ import { ref } from 'vue';
         <div class="button" @mousedown='appendInput($event, "9")'>9</div>
         <div class="button" @mousedown='appendInput($event, ".")'>.</div>
         <div class="button" @mousedown='appendInput($event, "0")'>0</div>
-        <div @mousedown='removeInput'><--</div>
+        <div @mousedown='removeInput'>
+            <img src="../../assets/backspace.svg" />
+        </div>
     </div>
 </template>
 
