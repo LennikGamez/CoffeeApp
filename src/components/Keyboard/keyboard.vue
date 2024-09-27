@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+    let dragging = false;
+    let startPos = {"x": 0, "y": 0};
+
+    window.addEventListener("mousemove", drag)
 
     const keyboard = ref<HTMLDivElement | null>(null);
 
@@ -31,12 +35,29 @@ import { ref } from 'vue';
         activeInput.value = activeInput.value.slice(0, -1)
     }
 
+    function startDrag(event: MouseEvent){
+        event?.preventDefault();
+        dragging = true;
+        startPos = {"x": event.offsetX, "y": event.offsetY};
+    }
+    function drag(event: MouseEvent){
+        if (!dragging) return
+        if (!keyboard.value) return
+        const diff = {"x": event.clientX - startPos.x, "y": event.clientY - startPos.y};
+        keyboard.value.style.left = diff.x + "px";
+        keyboard.value.style.top = diff.y + "px";
+    }
+    function stopDrag(event: MouseEvent){
+        event.preventDefault();
+        dragging = false;
+    }
+
     defineExpose({hide, show})
 </script>
 
 
 <template>
-    <div id="keyboard" ref="keyboard">
+    <div id="keyboard" ref="keyboard" @mousedown="startDrag" @mouseup="stopDrag">
         <div class="button" @mousedown='appendInput($event, "1")'>1</div>
         <div class="button" @mousedown='appendInput($event, "2")'>2</div>
         <div class="button" @mousedown='appendInput($event, "3")'>3</div>
@@ -71,6 +92,9 @@ import { ref } from 'vue';
         border: 1px solid black;
 
         padding-top: 30px;
+        background-color: white;
+        box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.226);
+        z-index: 100;
         
     }
     #keyboard::before{
