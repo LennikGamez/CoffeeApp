@@ -169,7 +169,8 @@
                 <label for="Bohnenmenge">
                     Bohnenmenge
                     <div>
-                        <input ref="Bohnenmenge" required name="Bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount"/>
+                        <input ref="Bohnenmenge" required name="Bohnenmenge" placeholder="Bohnenmenge" @input="checkBeanCount" @change="checkBeanCount" inputmode="numeric"
+                        />
                         <span>
                             g
                         </span>
@@ -178,13 +179,14 @@
                 <label for="mahlgrad">
                     Mahlgrad
                     <div>
-                        <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad" type="number" step="any"/>
+                        <input ref="mahlgrad" required name="mahlgrad" placeholder="Mahlgrad" inputmode="numeric"/>
                     </div>
                 </label>
                 <label for="Getränkemenge">
                     Getränkemenge
                     <div>
-                        <input ref="Getränkemenge" required name="Getränkemenge" placeholder="Getränkemenge"/>
+                        <input ref="Getränkemenge" required name="Getränkemenge" placeholder="Getränkemenge" inputmode="numeric"
+                        />
                         <span>
                             g
                         </span>
@@ -193,7 +195,7 @@
                 <label for="brühtemperatur">
                     Brühtemperatur
                     <div>
-                        <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur"/>
+                        <input ref="brühtemperatur" required name= "brühtemperatur" placeholder="Brühtemperatur" inputmode="numeric">
                         <span>°C</span>
                     </div>
                 </label>
