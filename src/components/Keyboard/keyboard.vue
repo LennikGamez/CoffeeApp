@@ -95,6 +95,8 @@ import { ref } from 'vue';
         background-color: white;
         box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.226);
         z-index: 100;
+
+        color: black;
         
     }
     #keyboard::before{
