@@ -5,6 +5,7 @@ import { ref } from 'vue';
     let startPos = {"x": 0, "y": 0};
 
     window.addEventListener("mousemove", drag)
+    window.addEventListener("touchmove", drag)
 
     const keyboard = ref<HTMLDivElement | null>(null);
 
@@ -35,19 +36,32 @@ import { ref } from 'vue';
         activeInput.value = activeInput.value.slice(0, -1)
     }
 
-    function startDrag(event: MouseEvent){
+    function startDrag(event: MouseEvent | TouchEvent){
         event?.preventDefault();
         dragging = true;
-        startPos = {"x": event.offsetX, "y": event.offsetY};
+        if(event instanceof TouchEvent){
+            const x = keyboard.value?.getBoundingClientRect().x as number;
+            const y = keyboard.value?.getBoundingClientRect().y as number;
+            startPos = {"x": event.touches[0].clientX - x, "y": event.touches[0].clientY - y};
+        }else{
+            startPos = {"x": event.offsetX, "y": event.offsetY};
+        }
     }
-    function drag(event: MouseEvent){
+    function drag(event: MouseEvent | TouchEvent){
         if (!dragging) return
         if (!keyboard.value) return
-        const diff = {"x": event.clientX - startPos.x, "y": event.clientY - startPos.y};
-        keyboard.value.style.left = diff.x + "px";
-        keyboard.value.style.top = diff.y + "px";
+        event.preventDefault();
+
+        if(event instanceof TouchEvent){
+            keyboard.value.style.left = event.touches[0].clientX - startPos.x + "px";
+            keyboard.value.style.top = event.touches[0].clientY - startPos.y + "px";
+        }else{
+            keyboard.value.style.left = event.clientX - startPos.x + "px";
+            keyboard.value.style.top = event.clientY - startPos.y + "px";
+
+        }
     }
-    function stopDrag(event: MouseEvent){
+    function stopDrag(event: MouseEvent | TouchEvent){
         event.preventDefault();
         dragging = false;
     }
@@ -57,7 +71,7 @@ import { ref } from 'vue';
 
 
 <template>
-    <div id="keyboard" ref="keyboard" @mousedown="startDrag" @mouseup="stopDrag">
+    <div id="keyboard" ref="keyboard" @mousedown="startDrag" @touchstart="startDrag" @mouseup="stopDrag" @touchend="stopDrag">
         <div class="button" @mousedown='appendInput($event, "1")'>1</div>
         <div class="button" @mousedown='appendInput($event, "2")'>2</div>
         <div class="button" @mousedown='appendInput($event, "3")'>3</div>
