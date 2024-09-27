@@ -48,7 +48,7 @@ import { ref } from 'vue';
         <div class="button" @mousedown='appendInput($event, "9")'>9</div>
         <div class="button" @mousedown='appendInput($event, ".")'>.</div>
         <div class="button" @mousedown='appendInput($event, "0")'>0</div>
-        <div @mousedown='removeInput'>
+        <div @mousedown='removeInput' id="backspace">
             <img src="../../assets/backspace.svg" />
         </div>
     </div>
@@ -67,8 +67,17 @@ import { ref } from 'vue';
         display: none;
         grid-template-columns: 1fr 1fr 1fr;
 
+        border-radius: var(--border-radius);
         border: 1px solid black;
+
+        padding-top: 30px;
         
+    }
+    #keyboard::before{
+        content: '====';
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
     }
 
     #keyboard.visible{
@@ -84,6 +93,19 @@ import { ref } from 'vue';
     #keyboard > *{
         aspect-ratio: 1/1;
         background-color: white;
+
+        border: thin dotted lightgray;
+        border-radius: var(--border-radius);
+    }
+
+    .button{
+        font-size: 1.5rem;
+    }
+
+    #backspace{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
