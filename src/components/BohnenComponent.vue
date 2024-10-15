@@ -37,7 +37,9 @@
         APIConnector.updateBohnen(identifier, data).then(()=> identifier = data.Name);
     }
 
-    function deleteBohne(){        
+    function deleteBohne(){      
+        let resp = confirm("Soll die Bohne wirklich gelöscht werden?");
+        if (!resp) return;  
         APIConnector.deleteBohnen(data.Name).then(()=>{
             emit('deleted');
         }).catch((err) => console.log(err));
@@ -50,7 +52,7 @@
     <div class="bohnen-component">
         <label>
             Name
-            <input v-model="data.Name" :readonly="!editMode" @change="updateData"/>
+            <input v-model="data.Name" :readonly="!editMode"/>
         </label>
         <label>
             Menge in g
