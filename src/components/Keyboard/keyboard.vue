@@ -60,7 +60,7 @@ import { ref } from 'vue';
             const x = keyboard.value?.getBoundingClientRect().x as number;
             const y = keyboard.value?.getBoundingClientRect().y as number;
             startPos = {"x": event.touches[0].clientX - x, "y": event.touches[0].clientY - y};
-        }else{
+        }else if(event instanceof MouseEvent){
             startPos = {"x": event.offsetX, "y": event.offsetY};
         }
     }
@@ -72,7 +72,7 @@ import { ref } from 'vue';
         if(window.TouchEvent && event instanceof TouchEvent){
             keyboard.value.style.left = event.touches[0].clientX - startPos.x + "px";
             keyboard.value.style.top = event.touches[0].clientY - startPos.y + "px";
-        }else{
+        }else if (event instanceof MouseEvent){
             keyboard.value.style.left = event.clientX - startPos.x + "px";
             keyboard.value.style.top = event.clientY - startPos.y + "px";
 
