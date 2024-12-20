@@ -56,7 +56,7 @@
         </label>
         <label>
             Menge in g
-            <input v-model="data.VorhandendeMenge" type="number" :readonly="!editMode"/>
+            <input v-model.number="data.VorhandendeMenge" inputmode="numeric" :readonly="!editMode"/>
         </label>
         <label>
             Röster
@@ -64,7 +64,7 @@
         </label>
         <label>
             Röstgrad
-            <input v-model="data.Röstgrad" type="number" :readonly="!editMode"/>
+            <input v-model.number="data.Röstgrad" inputmode="numeric" :readonly="!editMode"/>
         </label>
         <label v-if="editMode">
             Website
