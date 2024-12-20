@@ -16,10 +16,17 @@ import { ref } from 'vue';
         keyboard.value?.classList.add("visible");
     }
 
+    function isEditable(element: HTMLInputElement){
+        return !element.readOnly;
+    }
+
     function appendInput(event: Event, symbol: String){
         event.preventDefault();
         const activeInput = document.activeElement as HTMLInputElement;
+        if (!isEditable(activeInput)) return;
+
         const cursorPosition = activeInput.selectionStart;
+        console.log(activeInput);
         
         // insert the symbol at cursor position
         console.log(cursorPosition)
@@ -33,6 +40,8 @@ import { ref } from 'vue';
     function removeInput(event: Event){
         event.preventDefault();
         const activeInput = document.activeElement as HTMLInputElement;
+        if (!isEditable(activeInput)) return;
+        
         const cursorPosition = activeInput.selectionStart;
         if(cursorPosition === null) return;
         activeInput.value = activeInput.value.slice(0, cursorPosition - 1) + activeInput.value.slice(cursorPosition);
