@@ -32,6 +32,7 @@ import { ref } from 'vue';
         console.log(cursorPosition)
         if (cursorPosition === null) return;
         activeInput.value = activeInput.value.slice(0, cursorPosition) + symbol + activeInput.value.slice(cursorPosition);
+        activeInput.dispatchEvent(new Event('input', { bubbles: true }));   // dispatch input event to trigger v-model update
 
         // set cursor position
         activeInput.selectionStart = cursorPosition + 1;
@@ -45,6 +46,7 @@ import { ref } from 'vue';
         const cursorPosition = activeInput.selectionStart;
         if(cursorPosition === null) return;
         activeInput.value = activeInput.value.slice(0, cursorPosition - 1) + activeInput.value.slice(cursorPosition);
+        activeInput.dispatchEvent(new Event('input', { bubbles: true }));   // dispatch input event to trigger v-model update
 
         // set cursor position
         activeInput.selectionStart = cursorPosition - 1;
