@@ -41,7 +41,7 @@ import { ref } from 'vue';
         event.preventDefault();
         const activeInput = document.activeElement as HTMLInputElement;
         if (!isEditable(activeInput)) return;
-        
+
         const cursorPosition = activeInput.selectionStart;
         if(cursorPosition === null) return;
         activeInput.value = activeInput.value.slice(0, cursorPosition - 1) + activeInput.value.slice(cursorPosition);
@@ -54,7 +54,7 @@ import { ref } from 'vue';
     function startDrag(event: MouseEvent | TouchEvent){
         event?.preventDefault();
         dragging = true;
-        if(event instanceof TouchEvent){
+        if(window.TouchEvent && event instanceof TouchEvent){
             const x = keyboard.value?.getBoundingClientRect().x as number;
             const y = keyboard.value?.getBoundingClientRect().y as number;
             startPos = {"x": event.touches[0].clientX - x, "y": event.touches[0].clientY - y};
@@ -67,7 +67,7 @@ import { ref } from 'vue';
         if (!keyboard.value) return
         event.preventDefault();
 
-        if(event instanceof TouchEvent){
+        if(window.TouchEvent && event instanceof TouchEvent){
             keyboard.value.style.left = event.touches[0].clientX - startPos.x + "px";
             keyboard.value.style.top = event.touches[0].clientY - startPos.y + "px";
         }else{
