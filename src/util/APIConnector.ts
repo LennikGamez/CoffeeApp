@@ -1,7 +1,7 @@
 import { Bohne, Brühung } from "../DB-Models";
 
 class APIConnector{
-    static SERVER = "http://localhost:3000"; 
+    static SERVER = "http://192.168.178.211:3000"; 
 
     public static endpoint(endpoint: string): string{
         return APIConnector.SERVER + endpoint
