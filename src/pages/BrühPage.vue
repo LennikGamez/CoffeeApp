@@ -207,7 +207,7 @@
         </div>
         <div id="info-center">
             <InfoComponent v-for="(item, index) in info.success" :key="index" :message="item" status="success" />
-            <InfoComponent v-for="(item, index) in info.warnings" :key="index" :message="item" status="warning" />
+            <InfoComponent @close="release('warnings', index as string)" v-for="(item, index) in info.warnings" :key="index" :message="item" status="warning" />
             <InfoComponent v-for="(item, index) in info.errors" :key="index" :message="item" status="error" />
         </div>
     </form>

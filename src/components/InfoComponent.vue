@@ -4,12 +4,18 @@
         message: string,
          status: 'warning' | 'error' | 'success'
         }>();
+
+    const emit = defineEmits(['close']);
+
+
 </script>
 
 
 <template>
     <div id="info-component" :class="props.status">
-        <div class="status"></div>
+        <div @click="emit('close');" class="status">
+            <img src="../assets/close-icon.svg" />
+        </div>
         <span id="message">{{ props.message }}</span>
     </div>
 </template>
@@ -42,6 +48,18 @@
         aspect-ratio: 1 / 1;
         border-radius: 50%;
         background-color: brown;
+
+        display: flex;
+        justify-content: center;
+    }
+    .status > img{
+        width: 20px;
+        aspect-ratio: 1;
+        transition: transform 0.4s ease-in-out;
+        stroke-width: 5;
+    }
+    .status > img:hover{
+        transform: rotate(360deg);
     }
 
     #message {
