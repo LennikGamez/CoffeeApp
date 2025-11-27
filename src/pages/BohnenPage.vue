@@ -6,9 +6,19 @@ import { Ref, ref } from "vue";
 import APIConnector from "../util/APIConnector";
 
 const bohnenDataRef: Ref<BohnenType[]> = ref([] as BohnenType[]);
+const bohnenPage: Ref<HTMLDivElement | null> = ref(null);
 
 function addBohnenData(data: BohnenType) {
   bohnenDataRef.value.push(data);
+
+  setTimeout(() => {
+    if (bohnenPage.value) {
+      bohnenPage.value.scrollTo({
+        top: bohnenPage.value.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, 100);
 
   APIConnector.addBohnen(data).then(() => fetchData());
 }
@@ -25,7 +35,7 @@ fetchData();
 </script>
 
 <template>
-  <div id="bohnen-page">
+  <div id="bohnen-page" ref="bohnenPage">
     <h1>Bohnen</h1>
     <div id="bohnen-list">
       <Bohne
