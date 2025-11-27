@@ -18,7 +18,7 @@ function addBohnenData(data: BohnenType) {
         behavior: "smooth",
       });
     }
-  }, 100);
+  }, 1);
 
   APIConnector.addBohnen(data).then(() => fetchData());
 }
