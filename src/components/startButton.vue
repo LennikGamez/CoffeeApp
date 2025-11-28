@@ -44,6 +44,6 @@ import APIConnector from '../util/APIConnector';
 
 
 <template>
-    <input type="submit">
+    <input type="submit" value="Brühen">
     </input>
 </template>
