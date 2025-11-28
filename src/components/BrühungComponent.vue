@@ -47,7 +47,7 @@ import APIConnector from '../util/APIConnector';
             <img class="liked-icon" src="../assets/favchecked.svg"/>
         </button>
 
-        <h2>{{ props.data.BrühmethodenName }} - {{ props.data.BohnenName }}</h2>
+        <h2 id="brüh-title">{{ props.data.BrühmethodenName }} - {{ props.data.BohnenName }}</h2>
         <div id="mengen">
             <label>
                 Bohnenmenge
@@ -83,6 +83,7 @@ import APIConnector from '../util/APIConnector';
 
 <style scoped>
     #brühung-component {
+        text-align: center;
         position: relative;
         display: flex;
         flex-direction: column;
